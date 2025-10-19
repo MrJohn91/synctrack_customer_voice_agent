@@ -617,7 +617,7 @@ Sylvia: "Perfect! I've sent your information to our team. Someone from Synctrack
          Thanks for chatting with me today!"
 ```
 
-The lead is instantly sent to your n8n CRM via webhook.
+The lead is instantly sent to your n8n Data Tables via webhook.
 
 ---
 
