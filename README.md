@@ -32,12 +32,12 @@ Built with **LiveKit Agents Framework** + **ElevenLabs Voice Cloning** + **OpenA
 
 Sylvia is your 24/7 AI automation consultant that:
 
-- ✅ **Engages naturally** with warm, conversational AI using your cloned voice
-- ✅ **Explains Synctrack services** (automation, lead gen, AI workflows, voice agents, websites)
-- ✅ **Qualifies leads** by understanding business needs and pain points
-- ✅ **Captures data automatically** into n8n CRM via webhook
-- ✅ **Available 24/7** for website visitors across multiple channels
-- ✅ **Sounds like you** with ElevenLabs voice cloning technology
+- **Engages naturally** with warm, conversational AI using your cloned voice
+- **Explains Synctrack services** (automation, lead gen, AI workflows, voice agents, websites)
+- **Qualifies leads** by understanding business needs and pain points
+- **Captures data automatically** into n8n CRM via webhook
+- **Available 24/7** for website visitors across multiple channels
+- **Sounds like you** with ElevenLabs voice cloning technology
 
 ---
 
@@ -690,13 +690,8 @@ Sylvia automatically sends qualified lead data to your n8n CRM via webhook.
    ```
 
 2. **Example n8n webhook URLs:**
-   - Railway: `https://your-app.up.railway.app/webhook/sylvia-voice-agent`
    - n8n Cloud: `https://your-instance.app.n8n.cloud/webhook/sylvia-voice-agent`
    - Self-hosted: `https://n8n.yourdomain.com/webhook/sylvia-voice-agent`
-
-3. **Current configuration:**
-   ```
-   https://primary-production-5771.up.railway.app/webhook/sylvia-voice-agent
    ```
 
 ### Payload Format
@@ -1057,18 +1052,6 @@ Synctrack voice agent/
 
 ---
 
-## 🤝 Contributing
-
-Found a bug or want to improve Sylvia? Contributions are welcome!
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
----
-
 ## 📄 License
 
 This project is proprietary to Synctrack. All rights reserved.
@@ -1087,8 +1070,6 @@ Congratulations! You've successfully deployed Sylvia, your AI voice agent.
 5. Customize personality and services
 
 ---
-
-**Built with ❤️ by Synctrack**
 
 Using [LiveKit](https://livekit.io) • [ElevenLabs](https://elevenlabs.io) • [OpenAI](https://openai.com) • [Deepgram](https://deepgram.com)
 
