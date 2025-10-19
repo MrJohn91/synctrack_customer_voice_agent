@@ -680,12 +680,24 @@ Gets the current date and time
 
 ### Webhook Configuration
 
-Sylvia sends lead data to your n8n webhook:
+Sylvia automatically sends qualified lead data to your n8n CRM via webhook.
 
-**Webhook URL:**
-```
-https://primary-production-5771.up.railway.app/webhook-test/sylvia-voice-agent
-```
+**Configure Your Webhook URL:**
+
+1. **In `sylvia_agent.py` (line 29)**, update the webhook URL:
+   ```python
+   CRM_WEBHOOK_URL = "https://your-n8n-instance.com/webhook/sylvia-voice-agent"
+   ```
+
+2. **Example n8n webhook URLs:**
+   - Railway: `https://your-app.up.railway.app/webhook/sylvia-voice-agent`
+   - n8n Cloud: `https://your-instance.app.n8n.cloud/webhook/sylvia-voice-agent`
+   - Self-hosted: `https://n8n.yourdomain.com/webhook/sylvia-voice-agent`
+
+3. **Current configuration:**
+   ```
+   https://primary-production-5771.up.railway.app/webhook/sylvia-voice-agent
+   ```
 
 ### Payload Format
 
@@ -704,23 +716,43 @@ https://primary-production-5771.up.railway.app/webhook-test/sylvia-voice-agent
 
 ### Field Descriptions
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `source` | string | Always "voice" for Sylvia leads |
-| `name` | string | Lead's full name |
-| `email` | string | Lead's email (or "Not provided") |
-| `phone` | string | Lead's phone (or "Not provided") |
-| `company` | string | Lead's company name |
-| `intent` | string | Main interest or pain point |
-| `summary` | string | Brief conversation summary |
-| `timestamp` | string | ISO 8601 timestamp (UTC) |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `source` | string | ✅ | Always "voice" for Sylvia leads |
+| `name` | string | ✅ | Lead's full name |
+| `company` | string | ✅ | Lead's company name |
+| `intent` | string | ✅ | Main interest or pain point |
+| `email` | string | 🎯 | Lead's email (PRIORITY - highly recommended) |
+| `phone` | string | ⭐ | Lead's phone (optional, but nice to have) |
+| `summary` | string | ⭐ | Brief conversation summary (optional) |
+| `timestamp` | string | ✅ | ISO 8601 timestamp (UTC) |
 
-### Testing Webhook
+**Lead Capture Priority:**
+- **MINIMUM REQUIRED**: name, company, intent
+- **HIGHLY RECOMMENDED**: email (Sylvia will try to convince users to share it)
+- **OPTIONAL**: phone number (bonus if provided)
 
-Test your webhook integration:
+### Setting Up Your n8n Webhook
+
+**Step 1: Create Webhook in n8n**
+1. Open your n8n workflow editor
+2. Add a **Webhook** node (Trigger)
+3. Set HTTP Method to `POST`
+4. Set Path to `/webhook/sylvia-voice-agent`
+5. Copy the webhook URL (it will look like: `https://your-n8n.com/webhook/sylvia-voice-agent`)
+
+**Step 2: Update Sylvia's Configuration**
+1. Open `sylvia_agent.py`
+2. Find line 29: `CRM_WEBHOOK_URL = "..."`
+3. Replace with your n8n webhook URL
+4. Redeploy: `lk agent update sylvia --secrets-file .env`
+
+**Step 3: Test Your Webhook**
+
+Replace `YOUR_WEBHOOK_URL` with your actual webhook:
 
 ```bash
-curl -X POST https://primary-production-5771.up.railway.app/webhook-test/sylvia-voice-agent \
+curl -X POST YOUR_WEBHOOK_URL \
   -H "Content-Type: application/json" \
   -d '{
     "source": "voice",
@@ -733,6 +765,8 @@ curl -X POST https://primary-production-5771.up.railway.app/webhook-test/sylvia-
     "timestamp": "2025-10-17T12:00:00Z"
   }'
 ```
+
+**Expected Response:** `200 OK` or `202 Accepted`
 
 ---
 
@@ -948,10 +982,6 @@ Follow the wizard to:
 - [Deepgram API Docs](https://developers.deepgram.com/) - Speech recognition API
 - [OpenAI API Docs](https://platform.openai.com/docs) - GPT models reference
 
-### Tutorials & Guides
-- [Building Voice Agents with LiveKit](https://www.youtube.com/watch?v=TXVyxJdlzQs) - YouTube tutorial we followed
-- [Voice Cloning with ElevenLabs](https://elevenlabs.io/docs/product/voice-cloning) - How to clone your voice
-- [LiveKit Agents GitHub](https://github.com/livekit/agents) - Source code and examples
 
 ### Community & Support
 - [LiveKit Discord](https://livekit.io/discord) - Community support
@@ -980,7 +1010,7 @@ Based on testing in LiveKit Playground:
 |--------|-------------|
 | **Latency** | ~500-800ms (first response) |
 | **STT Accuracy** | 98%+ (Deepgram Nova-2) |
-| **Voice Quality** | Natural, human-like (ElevenLabs) |
+| **Voice Quality** | Natural, cloned (ElevenLabs) |
 | **Uptime** | 99.9% (LiveKit Cloud) |
 | **Concurrent Users** | Scales automatically |
 
