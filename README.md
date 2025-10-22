@@ -980,7 +980,6 @@ Follow the wizard to:
 
 ### Community & Support
 - [LiveKit Discord](https://livekit.io/discord) - Community support
-- [LiveKit GitHub Issues](https://github.com/livekit/agents/issues) - Bug reports
 - [LiveKit Cloud Status](https://status.livekit.io/) - Service status
 
 ---
@@ -1073,4 +1072,4 @@ Congratulations! You've successfully deployed Sylvia, your AI voice agent.
 
 Using [LiveKit](https://livekit.io) • [ElevenLabs](https://elevenlabs.io) • [OpenAI](https://openai.com) • [Deepgram](https://deepgram.com)
 
-**Questions?** Contact: hello@synctrack.com
+**Questions?** Contact: info@synctrack.de
